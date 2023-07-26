@@ -5,18 +5,21 @@ class StocksController < ApplicationController
       @stock = Stock.new_lookup(params[:stock])
       if @stock
         respond_to do |format|
-          # format.js { render partial: "users/result" }
           format.turbo_stream { render 'users/result', locals: { stock: @stock } }
         end
-        # render "users/my_portfolio"
       else
-        flash[:alert] = "#{params[:stock]} is not a valid stock symbol"
-        redirect_to my_portfolio_path
+        respond_to do |format|
+          format.turbo_stream do
+            render turbo_stream: turbo_stream.update("flash", partial: "layouts/flash", locals: { msg_type: :alert, message: "#{params[:stock]} is not a valid stock symbol" })
+          end
+        end
       end
     else
-      flash[:alert] = "Please enter a symbol to search"
-      redirect_to my_portfolio_path
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.update("flash", partial: "layouts/flash", locals: { msg_type: :alert, message: "Please enter a symbol to search" })
+        end
+      end
     end
   end
-
 end

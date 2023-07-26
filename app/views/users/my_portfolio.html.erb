@@ -9,7 +9,10 @@
           <%= form.text_field :stock, class: "form-control form-control-lg" %>
         </div>
         <div class="col-sm-3 no-left-padding">
-          <%= form.submit "search", class: "btn btn-success" %>
+          <%# form.submit "search", class: "btn btn-success" %>
+          <%= form.button nil, class:"btn btn-success" do %>
+            <% fa_icon 'search 2x' %>
+          <% end %>
         </div>
       </div>
     <% end %>
