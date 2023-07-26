@@ -12,10 +12,9 @@
 
   <body>
     <%# msg_type: :notice, :alert, :error, :success %>
-  <%= render 'layouts/nav' %>
+    <%= render 'layouts/nav' %>
     <div class="container">
       <%= render 'layouts/notices' %>
-      <%# render 'layouts/messages' %>
       <%= yield %>
     </div>
   </body>
