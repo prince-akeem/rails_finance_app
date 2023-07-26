@@ -6,7 +6,7 @@
     <%= form_with url: "search_stock", method: :get, data: {turbo_stream: true} do |form| %>
       <div class="form-group row">
         <div class="col-sm-9 no-right-padding">
-          <%= form.text_field :stock, class: "form-control form-control-lg" %>
+          <%= form.text_field :stock, placeholder: "Stock Symbol", class: "form-control form-control-lg"%>
         </div>
         <div class="col-sm-3 no-left-padding">
           <%# form.submit "search", class: "btn btn-success" %>
@@ -16,9 +16,10 @@
         </div>
       </div>
     <% end %>
-
-    </div>
-    <div id="results">
-
-    </div>
+    <div id="results"></div>
   <% end %>
+</div>
+
+<% if !@tracked_stocks.empty? %>
+  <%= render partial: 'users/stocks_table' %>
+<% end %>

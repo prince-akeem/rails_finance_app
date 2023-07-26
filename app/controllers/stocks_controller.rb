@@ -10,14 +10,15 @@ class StocksController < ApplicationController
       else
         respond_to do |format|
           format.turbo_stream do
-            render turbo_stream: turbo_stream.update("flash", partial: "layouts/flash", locals: { msg_type: :alert, message: "#{params[:stock]} is not a valid stock symbol" })
+            render turbo_stream: turbo_stream.update("flash", partial: "layouts/flash", locals: { msg_type: :error, message: "#{params[:stock]} is not a valid stock symbol" })
           end
         end
       end
     else
       respond_to do |format|
         format.turbo_stream do
-          render turbo_stream: turbo_stream.update("flash", partial: "layouts/flash", locals: { msg_type: :alert, message: "Please enter a symbol to search" })
+          render_flash(:alert, "Please enter a symbol to search")
+          # render turbo_stream: turbo_stream.update("flash", partial: "layouts/flash", locals: { msg_type: :alert, message: "Please enter a symbol to search" })
         end
       end
     end
