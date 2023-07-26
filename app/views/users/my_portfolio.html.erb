@@ -1,0 +1,21 @@
+<h1>My Portfolio</h1>
+
+<div class="search-area">
+  <h3>Search Stocks</h3>
+  <%= turbo_frame_tag 'search' do %>
+    <%= form_with url: "search_stock", method: :get, data: {turbo_stream: true} do |form| %>
+      <div class="form-group row">
+        <div class="col-sm-9 no-right-padding">
+          <%= form.text_field :stock, class: "form-control form-control-lg" %>
+        </div>
+        <div class="col-sm-3 no-left-padding">
+          <%= form.submit "search", class: "btn btn-success" %>
+        </div>
+      </div>
+    <% end %>
+
+    </div>
+    <div id="results">
+
+    </div>
+  <% end %>
